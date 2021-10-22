@@ -14,7 +14,7 @@ const postSagas = [
 function* onGetPostData(action) {
   try {
     const response = yield api.get(
-      'https://empty-sunset-b57a.kaushikiyer.workers.dev/posts'
+      'https://cloud-social-runner.kaushikiyer.workers.dev/posts'
     )
     yield put(actions.getAllPostsSuccess(response.data))
   } catch (error) {
@@ -26,7 +26,7 @@ function* onGetPostData(action) {
 function* onCreatePost(action) {
   try {
     const response = yield api.post(
-      'https://empty-sunset-b57a.kaushikiyer.workers.dev/posts',
+      'https://cloud-social-runner.kaushikiyer.workers.dev/posts',
       {},
       action.postDetails
     )
@@ -41,7 +41,7 @@ function* onUploadImage(action) {
   try {
     const key = action.userName + '_' + action.title.replaceAll(' ', '_')
     yield api.post(
-      `https://empty-sunset-b57a.kaushikiyer.workers.dev/posts/media/${key}`,
+      `https://cloud-social-runner.kaushikiyer.workers.dev/posts/media/${key}`,
       {
         'Content-Type': 'image/*',
       },
@@ -52,7 +52,7 @@ function* onUploadImage(action) {
       actions.uploadImageSuccess({
         title: action.title,
         username: action.userName,
-        content: `https://empty-sunset-b57a.kaushikiyer.workers.dev/assets/${key}`,
+        content: `https://cloud-social-runner.kaushikiyer.workers.dev/assets/${key}`,
         type: 'IMAGE',
         likes: 0,
       })
@@ -66,7 +66,7 @@ function* onUploadImage(action) {
 function* onIncrementLike(action) {
   try {
     const response = yield api.post(
-      'https://empty-sunset-b57a.kaushikiyer.workers.dev/posts/likes',
+      'https://cloud-social-runner.kaushikiyer.workers.dev/posts/likes',
       {},
       {
         postKey: action.postKey,
